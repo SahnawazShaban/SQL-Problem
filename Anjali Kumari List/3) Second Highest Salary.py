@@ -67,14 +67,50 @@ SELECT IFNULL((SELECT DISTINCT Salary
 
 
 -- SOLUTION - 2
-select max(Salary) as SecondHighestSalary from Employee 
-where Salary < (select max(Salary) from Employee)
+SELECT max(Salary) as SecondHighestSalary 
+FROM Employee 
+WHERE Salary < (SELECT max(Salary) FROM Employee);
+
+=========================
+Subquery: (SELECT MAX(Salary) FROM Employee) finds the highest salary in the Employee table.
+
+From our dataset, the highest salary is 300.
+Main Query: The main query finds the maximum salary that is less than the highest salary found in the subquery.
+
+It does this by evaluating the WHERE clause: Salary < 300.
+This filters the salaries in the Employee table to those less than 300.
+Evaluation of the WHERE clause:
+
+Salaries less than 300: 100, 200.
+Finding the maximum salary among these filtered salaries:
+
+The maximum of 100 and 200 is 200.
+So, the query correctly identifies that the second highest salary is 200 by:
+
+First finding the highest salary (300).
+Then finding the maximum salary among those salaries that are less than 300 (100 and 200).
+==========================
 
 
 -- SOLUTION - 3
-select max(e2.Salary) as SecondHighestSalary
-from Employee e1, Employee e2
-where e1.Salary > e2.Salary
+SELECT max(e2.Salary) as SecondHighestSalary
+FROM Employee e1, Employee e2
+WHERE e1.Salary > e2.Salary;
+
+=========================
+Self-Join: The Cartesian product of the Employee table with itself is created and filtered by e1.Salary > e2.Salary.
+
+Filtering Pairs:
+
+e1: 200 > e2: 100
+e1: 300 > e2: 100
+e1: 300 > e2: 200
+Finding the Maximum Salary among the filtered pairs:
+
+e2.Salaries in the filtered pairs: 100, 100, 200.
+The maximum of these salaries is 200.
+=======================
+
 '''
 
 # referee_id = NULL : this is not working
