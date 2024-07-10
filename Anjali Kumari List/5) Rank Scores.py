@@ -69,6 +69,31 @@ ORDER BY s.Score desc
 ------------------------------
 
 select score,dense_rank() over (order by score desc) as 'rank' from Scores;
+
+
+-------------------------------
+
+
+SELECT s1.score, 
+       (SELECT COUNT(*) 
+        FROM Scores s2 
+        WHERE s2.score = s1.score AND s2.id <= s1.id) AS 'rank'
+FROM Scores s1
+ORDER BY s1.score DESC, s1.id;
+
+OUTPUT:
+| score | rank |
+| ----- | ---- |
+| 4     | 1    |
+| 4     | 2    |
+| 3.85  | 1    |
+| 3.65  | 1    |
+| 3.65  | 2    |
+| 3.65  | 3    |
+| 3.5   | 1    |
+
 '''
 
 # The 'not equal' operator in MySQL is represented by <> or !=.
+
+

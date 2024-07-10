@@ -70,6 +70,15 @@ SET N=N-1;
       LIMIT 1 OFFSET N      
   );
 END
+
+
+----------------------------=============---------------------
+
+SELECT DISTINCT salary
+FROM employees
+ORDER BY salary DESC
+LIMIT 1 OFFSET N-1;
+
 '''
 
 # referee_id = NULL : this is not working
