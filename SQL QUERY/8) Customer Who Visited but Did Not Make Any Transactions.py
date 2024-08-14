@@ -105,6 +105,10 @@ WHERE t.transaction_id is NULL # without making any transactions is GIVEN
 GROUP BY v.customer_id 
 '''
 
+###### Extra ######
+# GROUP BY 1: This groups the result set by the first column listed in the SELECT statement, which is customer_id in this case.
+# GROUP BY customer_id: This explicitly groups the result set by the customer_id column.
+
 
 # After SELECT keyword column is same as after 'GROUP BY' column
 # -NOTE- whenever we use 'Aggregate Functions' at that time, we can use 'group by'
